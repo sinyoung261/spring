@@ -28,5 +28,11 @@ public class BoardServiceImpl implements BoardService {
 	public BoardVO findBoardByBno(BoardVO boardVO) {
 		return boardMapper.selectInfo(boardVO);
 	}
+	
+	@Override
+	public int createBoard(BoardVO boardVO) {
+		int result = boardMapper.insertInfo(boardVO);
+		return result == 1 ? boardVO.getBno() : -1;
+	}
 
 }

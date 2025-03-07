@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layouts/default_layout}"
+      layout:fragment="Content">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<form name="insertForm" 
+		  th:action="@{/bookInsert}" 
+		  method="post" class="container mt-3 w-50">
+		<div class="input-group mb-3">
+			<span class="input-group-text w-25">도서번호</span>
+	  		<input class="form-control" 
+	  			   type="number" name="bookNo" th:value="${book.bookNo}" readonly>
+		</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text w-25">도서명</span>
+	  		<input class="form-control" 
+	  			   type="text" name="bookName">
+		</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text w-25">도서표지</span>
+	  		<input class="form-control" 
+	  			   type="text" name="bookCoverimg">
+		</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text w-25">출판일자</span>
+	  		<input class="form-control" 
+	  			   type="text" name="bookDate" placeholder="yyyy/MM/dd">
+		</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text w-25">금액</span>
+	  		<input class="form-control"
+	  			   type="number" name="bookPrice" >
+		</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text w-25">출판사</span>
+	  		<input class="form-control" 
+	  			   type="text" name="bookPublisher" >
+		</div>
+		<div class="input-group mb-3">
+			<span class="input-group-text w-25">도서소개</span>
+	  		<textarea class="form-control" 
+	  				  name="bookInfo"></textarea>
+		</div>
+		<div>
+			<button class="btn btn-success"
+					type="submit">등록</button>
+			<button class="btn btn-success" 
+					type="button" th:onclick="|location.href='@{/}'|" >목록</button>
+		</div>
+	</form>
+	<script>
+		document.querySelector('form[name="insertForm"]')
+				.addEventListener('submit', function(event){
+					event.preventDefault();
+					
+					let name = insertForm.querySelector('[name="bookName"]');
+					if(name.value == ''){
+						alert('도서명이 입력되지 않았습니다.');
+						name.focus();
+						return;
+					}
+					alert('도서등록이 완료 되었습니다.');
+					insertForm.submit();
+				});
+	</script>
+</body>
+</html>
